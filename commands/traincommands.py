@@ -7,11 +7,11 @@ from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 
 model = commandsmodel.commandsmodel()
 
-X_train = np.load('X_commands.npy')
-Y_train = np.load('Y_commands.npy')
+X_train = np.load('preprocessing/X_commands.npy')
+Y_train = np.load('preprocessing/Y_commands.npy')
 
-X_test = np.load('X_test_commands.npy')
-Y_test = np.load('Y_test_commands.npy')
+X_test = np.load('preprocessing/X_test_commands.npy')
+Y_test = np.load('preprocessing/Y_test_commands.npy')
 X_test = X_test.reshape(-1, 8000, 1)
 
 es = EarlyStopping(monitor='val_acc', mode='max', patience=10, verbose=1)

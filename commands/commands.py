@@ -10,7 +10,7 @@ from tensorflow.keras import utils
 
 target_list = ['up', 'down', 'left', 'right', 'off']
 currentpath = os.getcwd()
-datapath = str(Path(currentpath).parent)
+datapath = str((Path(currentpath).parent).parent)
 dirs = [f for f in os.listdir(datapath) if os.path.isdir(os.path.join(datapath, f))]
 dirs.sort()
 notsdir = ['background_trigger', 'code', 'train', 'negatives', 'test']
@@ -112,8 +112,8 @@ y = utils.to_categorical(y)
 print(classes)
 
 print('saving')
-np.save('X_commands.npy', wav_all)
-np.save('Y_commands.npy', y)
+np.save('preprocessing/X_commands.npy', wav_all)
+np.save('preprocessing/Y_commands.npy', y)
 
 
 # preprocessing for the test data
@@ -121,7 +121,7 @@ print('Now Doing the Test Data')
 
 target_list_test = ['up', 'down', 'left', 'right', 'off', 'silence', 'unknown']
 currentpath_test = os.getcwd()
-datapath_test = str(Path(currentpath_test).parent)
+datapath_test = str((Path(currentpath_test).parent).parent)
 datapath_test = os.path.join(datapath_test, 'test')
 dirs_test = [f for f in os.listdir(datapath_test) if os.path.isdir(os.path.join(datapath_test, f))]
 dirs_test.sort()
@@ -156,8 +156,8 @@ y_test = utils.to_categorical(y_test)
 print(classes)
 
 print('saving')
-np.save('X_test_commands.npy', wav_vals_test)
-np.save('Y_test_commands.npy', y_test)
+np.save('preprocessing/X_test_commands.npy', wav_vals_test)
+np.save('preprocessing/Y_test_commands.npy', y_test)
 
 classtxt = open('classlist.txt', 'w')
 classtxt.write('The list is: {}'.format(classes))

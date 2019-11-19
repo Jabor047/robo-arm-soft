@@ -30,8 +30,8 @@ while i <= 2:
     i += 1
 
 print('Saving')
-np.save('X_triggerword_1.npy', X)
-np.save('Y_triggerword_1.npy', Y)
+np.save('preprocessing/X_triggerword_1.npy', X)
+np.save('preprocessing/Y_triggerword_1.npy', Y)
 
 del X
 del Y
@@ -57,5 +57,5 @@ while k <= 5:
     k += 1
 
 print('Saving')
-np.save('X_triggerword_2.npy', X1)
-np.save('Y_triggerword_2.npy', Y1)
+np.save('preprocessing/X_triggerword_2.npy', X1)
+np.save('preprocessing/Y_triggerword_2.npy', Y1)

@@ -15,7 +15,7 @@ from pathlib import Path
 from pydub import AudioSegment
 
 currentpath = os.getcwd()
-datapath = str(Path(currentpath).parent)
+datapath = str((Path(currentpath).parent).parent)
 
 if sys.platform == 'linux':
     connector = '/'

@@ -8,7 +8,7 @@ from tensorflow.keras.models import load_model
 
 logging.basicConfig(level=logging.ERROR)
 
-model = load_model('best_commands_model_GRU_2.h5')
+model = load_model('commands/best_commands_model_GRU_2.h5')
 classes = ['down', 'left', 'off', 'right', 'silence', 'unknown', 'up']
 
 

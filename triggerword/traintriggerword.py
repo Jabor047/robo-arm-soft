@@ -9,8 +9,8 @@ input_shape = (5511, 101)
 model = triggerwordmodel.trigger_model(input_shape)
 
 print('Loading data')
-X = np.load('X_triggerword.npy')
-Y = np.load('Y_triggerword.npy')
+X = np.load('preprocessing/X_triggerword.npy')
+Y = np.load('preprocessing/Y_triggerword.npy')
 
 print('Swapping axis')
 X_train = np.swapaxes(X, 1, 2)
