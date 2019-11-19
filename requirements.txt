@@ -1,0 +1,11 @@
+tensorflow
+numpy
+pyaudio
+pydub
+matplotlib
+sounddevice
+soundfile
+wave
+plotly
+librosa
+sklearn
