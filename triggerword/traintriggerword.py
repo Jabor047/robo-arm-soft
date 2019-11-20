@@ -17,11 +17,11 @@ X_train = np.swapaxes(X, 1, 2)
 Y_train = np.swapaxes(Y, 1, 2)
 
 es = EarlyStopping(monitor='acc', mode='max', verbose=1, patience=10)
-mc = ModelCheckpoint('best_trigger_model_TM_100.h5', monitor='acc', mode='max', verbose=1, save_best_only=True)
+mc = ModelCheckpoint('best_trigger_model_TM_50lr0.1.h5', monitor='acc', mode='max', verbose=1, save_best_only=True)
 
 print('Splitting and training')
 # X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42, shuffle=True)
-history = model.fit(X_train, Y_train, callbacks=[es, mc], batch_size=32, epochs=100)
+history = model.fit(X_train, Y_train, callbacks=[es, mc], batch_size=32, epochs=50)
 
 # accuracy graph
 plt.plot(history.history['acc'])
