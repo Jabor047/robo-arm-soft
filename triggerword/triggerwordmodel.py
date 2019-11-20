@@ -41,7 +41,7 @@ def trigger_model(input_shape):
     # lr_schedule = ExponentialDecay(initial_lr, decay_steps=10000, decay_rate=0.96, staircase=True)
     
     # when lr = 0.01 an accuracy of 94% was achieved
-    opt = Adam(lr=0.01, beta_1=0.9, beta_2=0.999)
+    opt = Adam(lr=0.01, beta_1=0.9, beta_2=0.999, decay=0.01)
     model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
     model.summary()
     return model
