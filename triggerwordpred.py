@@ -91,10 +91,10 @@ def chime_on(audio, chime_file, predictions, threshold):
 
 
 def main():
-    model = load_model('triggerword/best_trigger_model_TM_30.h5')
+    model = load_model('triggerword/best_trigger_model_TM_100.h5')
     chime_file = 'chime.wav'
     print('Hello there, please record your command immediately after you see start')
-    time.sleep(4)
+    time.sleep(4) 
     # print('Start')
     # record()
     audio = take_input()
