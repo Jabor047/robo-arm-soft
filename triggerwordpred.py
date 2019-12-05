@@ -31,7 +31,7 @@ def take_input():
     FORMAT = pyaudio.paInt16
     CHANNELS = 2
     RATE = 44100
-    RECORD_SECONDS = 3
+    RECORD_SECONDS = 10
     WAVE_OUTPUT_NAME = 'trigger.wav'
 
     p = pyaudio.PyAudio()
@@ -88,11 +88,19 @@ def chime_on(audio, chime_file, predictions, threshold):
     for i in range(Ty):
         consecutives_timesteps += 1
         if predictions[0, i, 0] > threshold and consecutives_timesteps > 75:
-            # subprocess.Popen([python_path, commandspred_path])
             audio_clip = audio_clip.overlay(chime, position=(
                 (i / Ty) * audio_clip.duration_seconds) * 1000)
             consecutives_timesteps = 0
     audio_clip.export('Chime_ouput.wav', format='wav')
+
+
+def launchcommand(predictions, threshold):
+    Ty = predictions.shape[1]
+    consecutive_timesteps = 0
+    for i in range(Ty):
+        consecutive_timesteps += 1
+        if predictions[0, i, 0] > threshold and consecutive_timesteps > 75:
+            subprocess.Popen([python_path, commandspred_path])
 
 
 def main():
