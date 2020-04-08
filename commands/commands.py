@@ -59,7 +59,6 @@ label_vals = label_vals.reshape(-1, 1)
 #     selected_noise = background[num_noise]
 #     start_idx = np.random.randint(0, len(selected_noise) - 1 - 8000)
 #     return selected_noise[start_idx: start_idx + 8000]
-    
 
 # max_ratio = 0.1
 # noise_wav = []

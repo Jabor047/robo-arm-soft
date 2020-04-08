@@ -104,7 +104,7 @@ def launchcommand(predictions, threshold):
 
 
 def main():
-    model = load_model('triggerword/best_trigger_model_TM_100.h5')
+    model = load_model('triggerword/best_trigger_model_TM_30.h5')
     chime_file = 'chime.wav'
     print('Hello there, please record your'
           'command immediately after you see start')

@@ -25,7 +25,6 @@ while i <= 2:
             print('Saving the spectogram for {}{}'.format(i, j))
             X.append(x)
             Y.append(y)
-            
         j += 1
     i += 1
 

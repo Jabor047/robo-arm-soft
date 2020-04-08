@@ -37,13 +37,14 @@ def graph_spectogram(wav_file):
     returns a spectogram picture'''
     rate, data = get_wav_info(wav_file)
     nfft = 200  # length of each window segment
-    fs = 8000  # sampling freequencies
+    fs = 44100  # sampling freequencies
     noverlap = 120
     nchannels = data.ndim
     if nchannels == 1:
         pxx, freqs, bins, im = plt.specgram(data, nfft, fs, noverlap=noverlap)
     elif nchannels == 2:
-        pxx, freqs, bins, im = plt.specgram(data[:, 0], nfft, fs, noverlap=noverlap)
+        pxx, freqs, bins, im = plt.specgram(data[:, 0], nfft, fs,
+                                            noverlap=noverlap)
     return pxx
 
 
@@ -66,8 +67,12 @@ def isdatabalanced():
         waves = [f for f in os.listdir(os.path.join(datapath, direct)) if f.endswith('.wav')]
         numberofrecordings.append(len(waves))
 
-    trace = go.Bar(x=dirs, y=numberofrecordings, marker=dict(color=numberofrecordings, colorscale='icefire', showscale=True))
-    layout = go.Layout(title='Number of recordings in given label', xaxis=dict(title='Words'), yaxis=dict(title='Number of recordings'))
+    trace = go.Bar(x=dirs, y=numberofrecordings,
+                   marker=dict(color=numberofrecordings,
+                               colorscale='icefire', showscale=True))
+    layout = go.Layout(title='Number of recordings in given label',
+                       xaxis=dict(title='Words'),
+                       yaxis=dict(title='Number of recordings'))
     py.plot(go.Figure(data=[trace], layout=layout))
 
 
@@ -78,41 +83,22 @@ def load_trigger_raw_audio():
     print('loading ons')
     for filename in os.listdir(os.path.join(datapath, 'on')):
         if filename.endswith('wav'):
-            on = AudioSegment.from_wav(os.path.join(datapath, 'on') + connector + filename)
+            on = AudioSegment.from_wav(os.path.join(datapath, 'on')
+                                       + connector + filename)
             ons.append(on)
     print('loading negatives')
     for filename in os.listdir(os.path.join(datapath, 'negatives')):
         if filename.endswith('wav'):
-            negative = AudioSegment.from_wav(os.path.join(datapath, 'negatives') + connector + filename)
+            negative = AudioSegment.from_wav(os.path.join(datapath, 'negatives')
+                                             + connector + filename)
             negatives.append(negative)
     print('loading background_trigger')
     for filename in os.listdir(os.path.join(datapath, 'background_trigger')):
         if filename.endswith('wav'):
-            background = AudioSegment.from_wav(os.path.join(datapath, 'background_trigger') + connector + filename)
+            background = AudioSegment.from_wav(os.path.join(datapath, 'background_trigger')
+                                               + connector + filename)
             backgrounds.append(background)
     return ons, negatives, backgrounds
-    
-
-# def load_all_raw_audio():
-#     '''Loads the wavfile and appends to a dicitonary of lists then returns the list'''
-#     listdict = {
-#         "background": [],
-#         "up": [],
-#         "down": [],
-#         "left": [],
-#         "right": []
-#     }
-#     dirs = [f for f in os.listdir(datapath) if os.path.isdir(os.path.join(datapath, f))]
-#     dirs.sort()
-#     dirs.remove('code', 'on', 'negatives')
-#     for dir in dirs:
-#         for filename in os.listdir(os.path.join(datapath, dir)):
-#             if filename.endswith('wav'):
-#                 file = AudioSegment.from_wav(os.path.join(datapath, dir) + connector + filename)
-#                 for k, v in listdict.items():
-#                     if k == dir:
-#                         listdict[k].append(file)
-#     return listdict
 
 
 def get_random_time_segment(segment_ms):
@@ -131,7 +117,7 @@ def is_overlapping(segment_time, previous_segments):
     Arguements:
     segment_time is a tuple of (segment_start, segment_end)for the new segment
     previous_segments is a list of tuples of all previous times
-    
+
     Returns:
     returns True is segment overlaps with any of the previous times'''
     segment_start, segment_end = segment_time
@@ -143,32 +129,33 @@ def is_overlapping(segment_time, previous_segments):
 
 
 def insert_audio_clip(background, audio_clip, previous_segments):
-    '''Insert a new audio segment over the background noise at a random time step, ensuring that
-    the audio segment does not overlap with existing segments
-    
+    '''Insert a new audio segment over the background noise at a random time
+    step, ensuring that the audio segment does not overlap with existing
+    segments
+
     Arguements:
     background -- a 10 second background recording
     audio_clip -- the audio clip being inserted
     previous_segments -- times where audio segments have been placed already
-    
+
     Returns:
     new_background -- the updated background clip'''
-    
+
     segment_ms = len(audio_clip)
     segment_time = get_random_time_segment(segment_ms)
-    
+
     while is_overlapping(segment_time, previous_segments):
         segment_time = get_random_time_segment(segment_ms)
-    
+
     previous_segments.append(segment_time)
     new_background = background.overlay(audio_clip, position=segment_time[0])
     return new_background, segment_time
 
 
 def insert_ones(y, segment_end_ms, Ty):
-    '''Update the label vector. The labels of the 40 output steps strictly after the end of the segment
-    should be set to 1. By strictly the label of segment_end_y should be 0 while, the 40 following labels
-    should be one
+    '''Update the label vector. The labels of the 40 output steps strictly
+    after the end of the segment should be set to 1. By strictly the label of
+    segment_end_y should be 0 while, the 40 following labels should be one
     Arguments:
     y -- numpy array of shape(1,Ty), the labels of the training examples
     segment_end_ms -- the end of time of the segment in ms
@@ -192,30 +179,33 @@ def create_trigger_dataset(background, ons, negatives, num, id, Ty):
     x -- spectogram of the created wav file
     '''
     background = background - 20
-    
+
     y = np.zeros((1, Ty))
     previous_segments = []
-    
+
     number_of_ons = np.random.randint(0, 5)
     random_indicies = np.random.randint(len(ons), size=number_of_ons)
     random_ons = [ons[i] for i in random_indicies]
-    
+
     for random_on in random_ons:
-        background, segment_time = insert_audio_clip(background, random_on, previous_segments)
+        background, segment_time = insert_audio_clip(background, random_on,
+                                                     previous_segments)
         segment_start, segment_end = segment_time
         y = insert_ones(y, segment_end, Ty)
     print(y)
     number_of_negatives = np.random.randint(0, 3)
-    random_indicies = np.random.randint(len(negatives), size=number_of_negatives)
+    random_indicies = np.random.randint(len(negatives),
+                                        size=number_of_negatives)
     random_negatives = [negatives[i] for i in random_indicies]
-    
+
     for random_negative in random_negatives:
-        background, _ = insert_audio_clip(background, random_negative, previous_segments)
-    
+        background, _ = insert_audio_clip(background, random_negative,
+                                          previous_segments)
+
     background = match_target_amplitude(background, -20.0)
     trainpath = os.path.join(datapath, 'train') + connector
     background.export(trainpath + 'train{}{}.wav'.format(num, id), format='wav')
-    
+
     x = graph_spectogram(trainpath + 'train{}{}.wav'.format(num, id))
-    
+
     return x, y
