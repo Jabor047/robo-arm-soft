@@ -84,7 +84,7 @@ def get_audio_stream(callback):
     return stream
 
 
-python_path = 'C:\\Python3\\python.exe'
+python_path = "C:\\Users\\gkkar\\AppData\\Local\\Programs\\Python\\Python36\\python.exe"
 commandfile_path = str(os.getcwd())+'\\commandspred.py'
 t1 = time.time()
 model = load_model('triggerword/best_trigger_model_TM_30.h5')
@@ -136,18 +136,20 @@ try:
             new_trigger = triggerword_heard(pred, chunk_duration,
                                             feed_duration)
             if new_trigger:
-                print(1)
-                # subprocess.Popen([python_path, commandfile_path])
-                # stream.stop_stream()
-                # stream.close()
-                # run = False
+                # print(1)
+                subprocess.Popen([python_path, commandfile_path])
+                stream.stop_stream()
+                stream.close()
+                run = False
 except (KeyboardInterrupt, SystemExit):
     stream.stop_stream()
     stream.close()
     timeout = time.time()
     run = False
+    exit()
 
 stream.stop_stream()
 stream.close()
 t2 = time.time()
 print(f'time taken = {t2-t1} seconds')
+exit()
