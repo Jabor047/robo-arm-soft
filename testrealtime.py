@@ -137,10 +137,7 @@ try:
                                             feed_duration)
             if new_trigger:
                 # print(1)
-                subprocess.Popen([python_path, commandfile_path])
-                stream.stop_stream()
-                stream.close()
-                run = False
+                subprocess.run([python_path, commandfile_path])
 except (KeyboardInterrupt, SystemExit):
     stream.stop_stream()
     stream.close()

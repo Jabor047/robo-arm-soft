@@ -51,17 +51,35 @@ def imp():
 
     prediction = predict(audio)
     command = prediction
-    if prediction == "silence" | prediction == "unknown":
+    if prediction == "silence" or prediction == "unknown":
         command = imp()
 
     return command
+
+
+def prog():
+    command = imp()
+    if command == "left":
+        print('Your command is : {}'.format("Turning Left"))
+        prog()
+    elif command == "right":
+        print('Your command is : {}'.format("Turning Right"))
+        prog()
+    elif command == "up":
+        print('Your command is : {}'.format("Going Up"))
+        prog()
+    elif command == "down":
+        print('Your command is : {}'.format("Going Down"))
+        prog()
+    elif command == "off":
+        exit()
 
 
 def main():
     print('Hello there, please record your command'
           'immediately after you see start')
 
-    print('Your command is : {}'.format(imp()))
+    prog()
 
 
 if __name__ == "__main__":
