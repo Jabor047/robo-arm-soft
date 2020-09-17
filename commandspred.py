@@ -2,6 +2,7 @@ import os
 import time
 import librosa
 import logging
+import serial
 import numpy as np
 import sounddevice as sd
 import soundfile as sf
@@ -57,29 +58,38 @@ def imp():
     return command
 
 
-def prog():
-    command = imp()
-    if command == "left":
-        print('Your command is : {}'.format("Turning Left"))
-        prog()
-    elif command == "right":
-        print('Your command is : {}'.format("Turning Right"))
-        prog()
-    elif command == "up":
-        print('Your command is : {}'.format("Going Up"))
-        prog()
-    elif command == "down":
-        print('Your command is : {}'.format("Going Down"))
-        prog()
-    elif command == "off":
-        exit()
+# def prog(arduino):
+#     command = imp()
+#     if command == "left":
+#         print('Your command is : {}'.format("Turning Left"))
+#         prog()
+#     elif command == "right":
+#         print('Your command is : {}'.format("Turning Right"))
+#         prog()
+#     elif command == "up":
+#         print('Your command is : {}'.format("Going Up"))
+#         prog()
+#     elif command == "down":
+#         print('Your command is : {}'.format("Going Down"))
+#         prog()
+#     elif command == "off":
+#         exit()
 
 
 def main():
     print('Hello there, please record your command'
           'immediately after you see start')
 
-    prog()
+    arduino = serial.Serial("COM1", 9600)
+    command = imp()
+
+    if command == "off":
+        exit()
+
+    command = str.encode(command)
+    arduino.write(command)
+
+    # prog(arduino)
 
 
 if __name__ == "__main__":
