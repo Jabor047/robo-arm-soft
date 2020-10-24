@@ -84,8 +84,8 @@ def get_audio_stream(callback):
     return stream
 
 
-python_path = "C:\\Users\\gkkar\\AppData\\Local\\Programs\\Python\\Python36\\python.exe"
-commandfile_path = str(os.getcwd()) + '\\commandspred.py'
+python_path = "/usr/bin/python3"
+commandfile_path = str(os.getcwd()) + '/commandspred.py'
 t1 = time.time()
 model = load_model('triggerword/best_trigger_model_TM_30.h5')
 
