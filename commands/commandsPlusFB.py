@@ -30,6 +30,8 @@ print('Loading background_command data')
 for wav in background:
     samples, sample_rate = librosa.load(os.path.join(os.path.join(datapath, 'background_command'), wav), sr=16000)
     samples = librosa.resample(samples, sample_rate, 8000)
+    if len(samples) != 8000:
+        continue
     background_noise.append(samples)
 
 print('Loading the unknown commands and the target commands')
