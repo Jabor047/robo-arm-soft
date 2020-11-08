@@ -34,14 +34,14 @@ es = EarlyStopping(monitor='val_acc', mode='max', patience=10, verbose=1)
 mc = ModelCheckpoint('best_commands_model_GRU_2.h5', monitor='val_acc', save_best_only=True, verbose=1, mode='max')
 
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42, shuffle=True)
-history = model.fit(X_train, Y_train, callbacks=[es, mc], validation_data=[X_test, Y_test],
+history = model.fit(X_train, Y_train, callbacks=[es, mc], validation_data=(X_test, Y_test),
                     batch_size=32, epochs=100)
 
 earlystopper = EarlyStopping(monitor='val_sparse_categorical_accuracy', patience=10,
                              verbose=1, restore_best_weights=True)
 checkpointer = ModelCheckpoint('model-attRNN.h5', monitor='val_sparse_categorical_accuracy',
                                verbose=1, save_best_only=True)
-attHistory = AttModel.fit(X_train, Y_train, validation_data=[X_test, Y_test], epochs=60, use_multiprocessing=False,
+attHistory = AttModel.fit(X_train, Y_train, validation_data=(X_test, Y_test), epochs=60, use_multiprocessing=False,
                           workers=4, verbose=2, callbacks=[earlystopper, checkpointer, lrate])
 
 # accuracy graph
