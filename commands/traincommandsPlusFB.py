@@ -1,4 +1,4 @@
-import commandsmodel
+import commandsmodelPlusFB
 import math
 import numpy as np
 import matplotlib.pyplot as plt
@@ -6,8 +6,8 @@ from sklearn.model_selection import train_test_split
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, LearningRateScheduler
 
 
-model = commandsmodel.commandsmodel()
-AttModel = commandsmodel.attRNN()
+model = commandsmodelPlusFB.commandsmodel()
+AttModel = commandsmodelPlusFB.attRNN()
 
 X = np.load('preprocessing/X_commands.npy')
 Y = np.load('preprocessing/Y_commands.npy')
