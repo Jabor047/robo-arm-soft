@@ -118,7 +118,7 @@ np.save('preprocessing/Y_commands.npy', y)
 # preprocessing for the test data
 print('Now Doing the Test Data')
 
-target_list_test = ['up', 'down', 'left', 'right', 'off', 'silence', 'unknown']
+target_list_test = ['up', 'down', 'left', 'right', 'off']
 currentpath_test = os.getcwd()
 datapath_test = str((Path(currentpath_test).parent).parent)
 datapath_test = os.path.join(datapath_test, 'test')
