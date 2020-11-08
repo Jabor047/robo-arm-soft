@@ -11,6 +11,7 @@ from tensorflow.keras import utils
 target_list = ['up', 'down', 'left', 'right', 'forward', 'backward', 'off']
 currentpath = os.getcwd()
 datapath = str((Path(currentpath).parent).parent)
+datapath = os.path.join(datapath, 'train')
 dirs = [f for f in os.listdir(datapath) if os.path.isdir(os.path.join(datapath, f))]
 dirs.sort()
 notsdir = ['background_trigger', 'code', 'train', 'negatives', 'test']
