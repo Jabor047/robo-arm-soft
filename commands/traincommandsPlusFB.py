@@ -33,11 +33,29 @@ def step_decay(epoch):
 lrate = LearningRateScheduler(step_decay)
 
 es = EarlyStopping(monitor='val_accuracy', mode='max', patience=10, verbose=1)
-mc = ModelCheckpoint('best_commands_model_GRU_2.h5', monitor='val_accuracy', save_best_only=True, verbose=1, mode='max')
+mc = ModelCheckpoint('model_GRU.h5', monitor='val_accuracy', save_best_only=True, verbose=1, mode='max')
 
 X_train, X_test, Y_train, Y_test = train_test_split(X, YOneHot, test_size=0.2, random_state=42, shuffle=True)
 history = model.fit(X_train, Y_train, callbacks=[es, mc], validation_data=(X_test, Y_test),
                     batch_size=32, epochs=100)
+
+# accuracy graph
+plt.plot(history.history['acc'])
+plt.plot(history.history['val_acc'])
+plt.title('Model_accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'], loc='upper left')
+plt.savefig('commands_accuracy_graph.png')
+
+# loss graph
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('model loss')
+plt.xlabel('epoch')
+plt.ylabel('Loss')
+plt.legend(['train', 'test'], loc='upper left')
+plt.savefig('commands_loss_graph.png')
 
 attX_train, attX_test, attY_train, attY_test = train_test_split(X, Y, test_size=0.2, random_state=42, shuffle=True)
 earlystopper = EarlyStopping(monitor='val_sparse_categorical_accuracy', patience=10,
@@ -49,14 +67,6 @@ attHistory = AttModel.fit(attX_train, attY_train, validation_data=(attX_test, at
                           callbacks=[earlystopper, checkpointer, lrate])
 
 # accuracy graph
-plt.plot(history.history['acc'])
-plt.plot(history.history['val_acc'])
-plt.title('Model_accuracy')
-plt.ylabel('accuracy')
-plt.xlabel('epoch')
-plt.legend(['train', 'test'], loc='upper left')
-plt.savefig('commands_accuracy_graph.png')
-
 plt.plot(attHistory.history['acc'])
 plt.plot(attHistory.history['val_acc'])
 plt.title('Model_accuracy')
@@ -66,14 +76,6 @@ plt.legend(['train', 'test'], loc='upper left')
 plt.savefig('tt_Acommands_accuracy_graph.png')
 
 # loss graph
-plt.plot(history.history['loss'])
-plt.plot(history.history['val_loss'])
-plt.title('model loss')
-plt.xlabel('epoch')
-plt.ylabel('Loss')
-plt.legend(['train', 'test'], loc='upper left')
-plt.savefig('commands_loss_graph.png')
-
 plt.plot(attHistory.history['loss'])
 plt.plot(attHistory.history['val_loss'])
 plt.title('model loss')
