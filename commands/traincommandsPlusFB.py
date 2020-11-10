@@ -40,8 +40,8 @@ history = model.fit(X_train, Y_train, callbacks=[es, mc], validation_data=(X_tes
                     batch_size=32, epochs=100)
 
 # accuracy graph
-plt.plot(history.history['acc'])
-plt.plot(history.history['val_acc'])
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
 plt.title('Model_accuracy')
 plt.ylabel('accuracy')
 plt.xlabel('epoch')
@@ -67,8 +67,8 @@ attHistory = AttModel.fit(attX_train, attY_train, validation_data=(attX_test, at
                           callbacks=[earlystopper, checkpointer, lrate])
 
 # accuracy graph
-plt.plot(attHistory.history['acc'])
-plt.plot(attHistory.history['val_acc'])
+plt.plot(attHistory.history['accuracy'])
+plt.plot(attHistory.history['val_accuracy'])
 plt.title('Model_accuracy')
 plt.ylabel('accuracy')
 plt.xlabel('epoch')
