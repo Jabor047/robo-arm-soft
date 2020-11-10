@@ -110,11 +110,12 @@ label_encoder = LabelEncoder()
 fit_y = label_encoder.fit(labels)
 y = fit_y.transform(label_all.ravel())
 classes = list(label_encoder.classes_)
-y = utils.to_categorical(y)
+yOneHot = utils.to_categorical(y)
 print(classes)
 
 print('saving')
 np.save('preprocessing/X_commands.npy', wav_all)
+np.save('preprocessing/YOneHot_commands.npy', yOneHot)
 np.save('preprocessing/Y_commands.npy', y)
 
 
