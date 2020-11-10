@@ -10,7 +10,7 @@ model = commandsmodelPlusFB.commandsmodel()
 AttModel = commandsmodelPlusFB.attRNN()
 
 X = np.load('preprocessing/X_commands.npy')
-YOneHot = np.load('preprocessing/YOnehot_commands.npy')
+YOneHot = np.load('preprocessing/YOneHot_commands.npy')
 Y = np.load('preprocessing/Y_commands.npy')
 
 
