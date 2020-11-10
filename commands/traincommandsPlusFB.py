@@ -67,8 +67,8 @@ attHistory = AttModel.fit(attX_train, attY_train, validation_data=(attX_test, at
                           callbacks=[earlystopper, checkpointer, lrate])
 
 # accuracy graph
-plt.plot(attHistory.history['accuracy'])
-plt.plot(attHistory.history['val_accuracy'])
+plt.plot(attHistory.history['sparse_categorical_accuracy'])
+plt.plot(attHistory.history['val_sparse_categorical_accuracy'])
 plt.title('Model_accuracy')
 plt.ylabel('accuracy')
 plt.xlabel('epoch')
@@ -76,8 +76,8 @@ plt.legend(['train', 'test'], loc='upper left')
 plt.savefig('tt_Acommands_accuracy_graph.png')
 
 # loss graph
-plt.plot(attHistory.history['loss'])
-plt.plot(attHistory.history['val_loss'])
+plt.plot(attHistory.history['sparse_categorical_accuracy'])
+plt.plot(attHistory.history['val_sparse_categorical_accuracy'])
 plt.title('model loss')
 plt.xlabel('epoch')
 plt.ylabel('Loss')

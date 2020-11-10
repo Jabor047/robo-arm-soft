@@ -14,7 +14,7 @@ from pyfirmata import Arduino, util
 
 logging.basicConfig(level=logging.ERROR)
 
-model = load_model('commands/best_commands_model_GRU_2.h5')
+model = load_model('commands/model_GRU.h5')
 classes = ['down', 'left', 'off', 'right', 'silence', 'unknown', 'up']
 chimewav = os.getcwd() + "/chime.wav"
 
@@ -92,26 +92,30 @@ def main():
     iterSer = util.Iterator(board)
     iterSer.start()
 
+    RightLeftAngle = RightLeftServoPin.read()
+    ForwardBackwardAngle = ForwardBackwardServoLPin.read()
+    UpDownServoAnlge = UpDownServoPin.read()
+
     while True:
         command = imp()
         if command == "left":
             print('Your command is : {}'.format("Turning Left"))
-            RightLeftServoPin.write(-90)
+            RightLeftServoPin.write(RightLeftAngle - 90)
         elif command == "right":
             print('Your command is : {}'.format("Turning Right"))
-            RightLeftServoPin.write(+90)
+            RightLeftServoPin.write(RightLeftAngle + 90)
         elif command == "up":
             print('Your command is : {}'.format("Going Up"))
-            UpDownServoPin.write(+90)
+            UpDownServoPin.write(ForwardBackwardAngle + 90)
         elif command == "down":
             print('Your command is : {}'.format("Going Down"))
-            UpDownServoPin.write(-90)
+            UpDownServoPin.write(ForwardBackwardAngle - 90)
         elif command == "forward":
             print('Your command is : {}'.format("Going forward"))
-            ForwardBackwardServoLPin.write(+90)
+            ForwardBackwardServoLPin.write(UpDownServoAnlge + 90)
         elif command == "backward":
             print('Your command is : {}'.format("Going backward"))
-            ForwardBackwardServoLPin.write(-90)
+            ForwardBackwardServoLPin.write(UpDownServoAnlge - 90)
         elif command == "off":
             break
 
