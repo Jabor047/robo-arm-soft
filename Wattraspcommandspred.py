@@ -54,7 +54,7 @@ def load_audio():
 def imp():
     time.sleep(4)
     chime = AudioSegment.from_wav(chimewav)
-    # play(chime)
+    play(chime)
     print('Start')
     record()
     audio = load_audio()
@@ -90,7 +90,7 @@ def main():
           'immediately after you see start')
     # windows = 'COM8'
     # PiOS = '/dev/ttyUSB0'
-    board = Arduino('/dev/ttyUSB0')
+    board = Arduino('COM8')
     RightLeftServoPin = board.get_pin('d:5:s')
     ForwardBackwardServoLPin = board.get_pin('d:6:s')
     UpDownServoPin = board.get_pin('d:7:s')
