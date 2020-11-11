@@ -1,1 +1,1 @@
-The list is: ['down', 'left', 'off', 'right', 'silence', 'unknown', 'up']
+The list is: ['backward', 'down', 'forward', 'left', 'off', 'right', 'silence', 'unknown', 'up']
