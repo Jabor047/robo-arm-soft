@@ -88,8 +88,9 @@ def imp():
 def main():
     print('Hello there, please record your command'
           'immediately after you see start')
-
-    board = Arduino('COM8')
+    # windows = 'COM8'
+    # PiOS = '/dev/ttyUSB0'
+    board = Arduino('/dev/ttyUSB0')
     RightLeftServoPin = board.get_pin('d:5:s')
     ForwardBackwardServoLPin = board.get_pin('d:6:s')
     UpDownServoPin = board.get_pin('d:7:s')
