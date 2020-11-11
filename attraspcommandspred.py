@@ -3,7 +3,7 @@ import time
 import librosa
 import logging
 import serial
-import commandsmodelPlusFB
+import models
 import numpy as np
 import sounddevice as sd
 import soundfile as sf
@@ -18,7 +18,7 @@ from kapre.utils import Normalization2D
 logging.basicConfig(level=logging.ERROR)
 
 currentpath = os.getcwd()
-model = commandsmodelPlusFB.attRNN()
+model = models.attRNN()
 model.load_weights('commands/model-attRNN-weights.h5')
 # model = load_model('commands/model-attRNN.h5', custom_objects={'Melspectrogram': Melspectrogram,
 # 'Normalization2D': Normalization2D})

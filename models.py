@@ -126,6 +126,5 @@ def attRNN():
 
     model.compile(optimizer='adam', loss=['sparse_categorical_crossentropy'],
                   metrics=['sparse_categorical_accuracy'])
-    model.summary()
 
     return model
