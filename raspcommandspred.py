@@ -16,8 +16,7 @@ from kapre.utils import Normalization2D
 
 logging.basicConfig(level=logging.ERROR)
 
-model = load_model('commands/model-attRNN.h5', custom_objects={'Melspectrogram': Melspectrogram,
-                                                               'Normalization2D': Normalization2D})
+model = load_model('commands/model-GRU.h5')
 classes = ['backward', 'down', 'forward', 'left', 'off', 'right', 'silence', 'unknown', 'up']
 chimewav = os.getcwd() + "/chime.wav"
 
