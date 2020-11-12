@@ -102,7 +102,7 @@ def main():
 
     RightLeftAngle = RightLeftServoPin.read()
     ForwardBackwardAngle = ForwardBackwardServoLPin.read()
-    UpDownServoAnlge = UpDownServoPin.read()
+    UpDownServoAngle = UpDownServoPin.read()
 
     while True:
         command = imp()
@@ -120,10 +120,10 @@ def main():
             UpDownServoPin.write(ForwardBackwardAngle - 90)
         elif command == "forward":
             print('Your command is : {}'.format("Going forward"))
-            ForwardBackwardServoLPin.write(UpDownServoAnlge + 90)
+            ForwardBackwardServoLPin.write(UpDownServoAngle + 90)
         elif command == "backward":
             print('Your command is : {}'.format("Going backward"))
-            ForwardBackwardServoLPin.write(UpDownServoAnlge - 90)
+            ForwardBackwardServoLPin.write(UpDownServoAngle - 90)
         elif command == "off":
             break
 
