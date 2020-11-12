@@ -51,7 +51,7 @@ def imp():
     chime = AudioSegment.from_wav(chimewav)
     play(chime)
     print('Start')
-    sleep(1)
+    sleep(0.5)
     record()
     audio = load_audio()
 
