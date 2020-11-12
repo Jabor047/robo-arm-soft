@@ -100,30 +100,29 @@ def main():
     iterSer = util.Iterator(board)
     iterSer.start()
 
-    RightLeftAngle = RightLeftServoPin.read()
-    ForwardBackwardAngle = ForwardBackwardServoLPin.read()
-    UpDownServoAngle = UpDownServoPin.read()
+    angle = 90
+    change = 45
 
     while True:
         command = imp()
         if command == "left":
             print('Your command is : {}'.format("Turning Left"))
-            RightLeftServoPin.write(RightLeftAngle - 90)
+            RightLeftServoPin.write(angle - change)
         elif command == "right":
             print('Your command is : {}'.format("Turning Right"))
-            RightLeftServoPin.write(RightLeftAngle + 90)
+            RightLeftServoPin.write(angle + change)
         elif command == "up":
             print('Your command is : {}'.format("Going Up"))
-            UpDownServoPin.write(ForwardBackwardAngle + 90)
+            UpDownServoPin.write(angle - change)
         elif command == "down":
             print('Your command is : {}'.format("Going Down"))
-            UpDownServoPin.write(ForwardBackwardAngle - 90)
+            UpDownServoPin.write(angle + change)
         elif command == "forward":
             print('Your command is : {}'.format("Going forward"))
-            ForwardBackwardServoLPin.write(UpDownServoAngle + 90)
+            ForwardBackwardServoLPin.write(angle + change)
         elif command == "backward":
             print('Your command is : {}'.format("Going backward"))
-            ForwardBackwardServoLPin.write(UpDownServoAngle - 90)
+            ForwardBackwardServoLPin.write(angle - change)
         elif command == "off":
             break
 
