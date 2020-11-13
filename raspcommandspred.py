@@ -48,8 +48,8 @@ def load_audio():
 
 def imp():
     time.sleep(4)
-    chime = AudioSegment.from_wav(chimewav)
-    play(chime)
+    # chime = AudioSegment.from_wav(chimewav)
+    # play(chime)
     print('Start')
     sleep(0.5)
     record()
@@ -108,10 +108,10 @@ def main():
             RightLeftServoPin.write(angle + change)
         elif command == "up":
             print('Your command is : {}'.format("Going Up"))
-            UpDownServoPin.write(angle - change)
+            UpDownServoPin.write(angle + change)
         elif command == "down":
             print('Your command is : {}'.format("Going Down"))
-            UpDownServoPin.write(angle + change)
+            UpDownServoPin.write(angle - change)
         elif command == "forward":
             print('Your command is : {}'.format("Going forward"))
             ForwardBackwardServoLPin.write(angle + change)

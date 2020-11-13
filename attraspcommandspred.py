@@ -113,10 +113,10 @@ def main():
             RightLeftServoPin.write(angle + change)
         elif command == "up":
             print('Your command is : {}'.format("Going Up"))
-            UpDownServoPin.write(angle - change)
+            UpDownServoPin.write(angle + change)
         elif command == "down":
             print('Your command is : {}'.format("Going Down"))
-            UpDownServoPin.write(angle + change)
+            UpDownServoPin.write(angle - change)
         elif command == "forward":
             print('Your command is : {}'.format("Going forward"))
             ForwardBackwardServoLPin.write(angle + change)
