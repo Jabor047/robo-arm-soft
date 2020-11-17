@@ -119,6 +119,7 @@ def main():
             print('Your command is : {}'.format("Going backward"))
             ForwardBackwardServoLPin.write(angle - change)
         elif command == "off":
+            print('Your command is : {} /n Turning off '.format("off"))
             break
 
     board.exit()
