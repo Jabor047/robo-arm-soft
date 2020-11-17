@@ -83,7 +83,7 @@ def imp():
 # pin.read to get servo angle before adding direction
 def main():
     print('Hello there, please record your command'
-          'immediately after you see start')
+          ' immediately after you see start')
 
     board = Arduino('/dev/ttyUSB0')
     RightLeftServoPin = board.get_pin('d:5:s')
@@ -101,25 +101,25 @@ def main():
     while True:
         command = imp()
         if command == "left":
-            print('Your command is : {}'.format("Turning Left"))
+            print('Your command is : {} \n Turning Left'.format("Left"))
             RightLeftServoPin.write(angle - change)
         elif command == "right":
-            print('Your command is : {}'.format("Turning Right"))
+            print('Your command is : {} \n Turning Right'.format("Right"))
             RightLeftServoPin.write(angle + change)
         elif command == "up":
-            print('Your command is : {}'.format("Going Up"))
+            print('Your command is : {} \n Going Up'.format("Up"))
             UpDownServoPin.write(angle + change)
         elif command == "down":
-            print('Your command is : {}'.format("Going Down"))
+            print('Your command is : {} \n Going Down'.format("Down"))
             UpDownServoPin.write(angle - change)
         elif command == "forward":
-            print('Your command is : {}'.format("Going forward"))
+            print('Your command is : {} \n Going forward'.format("forward"))
             ForwardBackwardServoLPin.write(angle + change)
         elif command == "backward":
-            print('Your command is : {}'.format("Going backward"))
+            print('Your command is : {} \n Going backward'.format("backward"))
             ForwardBackwardServoLPin.write(angle - change)
         elif command == "off":
-            print('Your command is : {} /n Turning off '.format("off"))
+            print('Your command is : {} \n Turning off '.format("off"))
             break
 
     board.exit()
