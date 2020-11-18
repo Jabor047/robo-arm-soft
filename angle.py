@@ -18,3 +18,8 @@ UpDownServoAngle = UpDownServoPin.read()
 print(RightLeftAngle)
 print(ForwardBackwardAngle)
 print(UpDownServoAngle)
+
+angle = 90
+RightLeftServoPin.write(angle)
+UpDownServoPin.write(angle)
+ForwardBackwardServoLPin.write(angle)
