@@ -19,7 +19,7 @@ print(RightLeftAngle)
 print(ForwardBackwardAngle)
 print(UpDownServoAngle)
 
-angle = 10
+angle = 0
 RightLeftServoPin.write(angle)
 UpDownServoPin.write(angle)
 ForwardBackwardServoLPin.write(angle)
