@@ -90,7 +90,7 @@ def main():
     ForwardBackwardServoLPin = board.get_pin('d:6:s')
     UpDownServoPin = board.get_pin('d:7:s')
     # gripServoPin = board.get_pin('d:8:p')
-    sleep(5)
+    sleep(3)
 
     iterSer = util.Iterator(board)
     iterSer.start()
@@ -103,21 +103,27 @@ def main():
         if command == "left":
             print('Your command is : {} \n Turning Left'.format("Left"))
             RightLeftServoPin.write(angle - change)
+            board.pass_time(2)
         elif command == "right":
             print('Your command is : {} \n Turning Right'.format("Right"))
             RightLeftServoPin.write(angle + change)
+            board.pass_time(2)
         elif command == "up":
             print('Your command is : {} \n Going Up'.format("Up"))
             UpDownServoPin.write(angle + change)
+            board.pass_time(2)
         elif command == "down":
             print('Your command is : {} \n Going Down'.format("Down"))
             UpDownServoPin.write(angle - change)
+            board.pass_time(2)
         elif command == "forward":
             print('Your command is : {} \n Going forward'.format("forward"))
             ForwardBackwardServoLPin.write(angle + change)
+            board.pass_time(2)
         elif command == "backward":
             print('Your command is : {} \n Going backward'.format("backward"))
             ForwardBackwardServoLPin.write(angle - change)
+            board.pass_time(2)
         elif command == "off":
             print('Your command is : {} \n Turning off '.format("off"))
             break
