@@ -1,6 +1,19 @@
-# robo-arm-soft
-The RNNs and the necessary python scripts for my voice controlled robo-arm project
+# Voice Controlled Robot Arm
 
-Using the dataset from google's speech command dataset. I used that data to train the commands section
+Here contains the code for a voice controlled robot arm. The hardware consists of a raspberry pi, arduino and an assembled mechanical arm 
 
-I then Augemented the above mentioned data to create a dataset that was suitable for the training of a triggerword model.
+## Folders
+- ### Commands
+Here lies the code necessary for loading the commands audio data and converting it to numpy arrays, the model definition and training of the commands model.
+- ### Preprocessing
+Here lies the code necessary for preprocessing of audio data including making sure all audio clips are of the same length, making
+the negative data and summing up all the numpy array batches made by triggerword.
+
+- ### Triggerword
+Here lies the code necessary for loading the triggerwords audio data and converting it to numpy arrays, the triggerword model definition and training of the triggerword model and utilities for convertion of the wav files into spectograms
+
+- ### Practice_code
+Here lies all the miscellaneous bits of code I came up with to complete the project, scripts and code from here is aggregrated to form the scripts that actually run the project
+
+## Usage
+Connect the arduino to the raspberry pi, with the mechanical arm connected in the necessary arduino ports. The run ``` python3 rasptestrealtime.py ```
